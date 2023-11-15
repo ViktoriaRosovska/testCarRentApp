@@ -1,11 +1,14 @@
 {
   "name": "testcarrentapp",
+  "homepage": "https://github.com/ViktoriaRosovska/testCarRentApp",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
@@ -21,6 +24,7 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
+    "gh-pages": "^6.0.0",
     "vite": "^4.4.5"
   },
   "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
