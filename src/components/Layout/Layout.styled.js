@@ -18,8 +18,8 @@ export const Container = styled.section`
     width: 768px;
   }
   @media screen and (min-width: 1440px) {
-    padding-left: 100px;
-    padding-right: 100px;
+    padding-left: 90px;
+    padding-right: 90px;
     width: 1440px;
   }
 `;
