@@ -2,13 +2,13 @@ import PropTypes from "prop-types";
 import { Card } from "../Card/Card";
 import { CollectionWrapper } from "./AdvertsCollection.styled";
 
-export const AdvertsCollection = ({ adverts }) => {
+export const AdvertsCollection = ({ adverts, onShowModalClick }) => {
   return (
     <>
       <CollectionWrapper>
         {adverts.map((advert) => (
           <li key={advert.id}>
-            <Card advert={advert} />
+            <Card advert={advert} onShowModalClick={onShowModalClick} />
           </li>
         ))}
       </CollectionWrapper>
@@ -17,9 +17,10 @@ export const AdvertsCollection = ({ adverts }) => {
 };
 
 AdvertsCollection.propTypes = {
+  onShowModalClick: PropTypes.func,
   adverts: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number,
+      id: PropTypes.string,
       address: PropTypes.string,
       functionalities: PropTypes.array,
       type: PropTypes.string,

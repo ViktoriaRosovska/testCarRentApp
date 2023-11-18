@@ -3,14 +3,6 @@ import styled from "styled-components";
 export const CardWrapper = styled.div`
   width: 274px;
   height: 426px;
-  border: 1px solid red;
-`;
-
-export const ImageItem = styled.img`
-  object-fit: cover;
-  object-position: center;
-  width: 100%;
-  height: 100%;
 `;
 
 export const ImageWrapper = styled.div`
@@ -49,5 +41,5 @@ export const ShortDescription = styled.div`
   width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-bottom: 28px;
+  margin-bottom: ${(props) => props.marginbottom};
 `;

@@ -1,13 +1,17 @@
 import PropTypes from "prop-types";
-import { CardWrapper, ImageItem, ImageWrapper, ShortDescription, TitleWraper } from "./Card.styled";
+import { CardWrapper, ImageWrapper, ShortDescription, TitleWraper } from "./Card.styled";
 import { BaseButton } from "../Button/BaseButton";
+import { ImageItem } from "../../App.styled";
 
-export const Card = ({ advert }) => {
-  const { img, model, year, make, rentalPrice, address, rentalCompany, mileage, type, functionalities } = advert;
+export const Card = ({ advert, onShowModalClick }) => {
+  const { img, model, year, make, rentalPrice, address, rentalCompany, mileage, type, functionalities, id } = advert;
   const shortAdress = (address) => {
     const adr = [...address.split(",")];
     adr.splice(0, 1);
     return adr.join(" | ");
+  };
+  const onShowModal = (advertId) => {
+    onShowModalClick(advertId);
   };
   return (
     <CardWrapper>
@@ -22,16 +26,18 @@ export const Card = ({ advert }) => {
 
           <div>{rentalPrice}</div>
         </TitleWraper>
-        <ShortDescription>
+        <ShortDescription marginbottom="28px">
           {shortAdress(address)} | {rentalCompany} | {type} | {model} | {mileage} | {functionalities[0]}
         </ShortDescription>
       </div>
-      <BaseButton type="button" title="Learn more" />
+      <BaseButton type="button" title="Learn more" onClick={() => onShowModal(id)} />
     </CardWrapper>
   );
 };
 Card.propTypes = {
+  onShowModalClick: PropTypes.func,
   advert: PropTypes.shape({
+    id: PropTypes.string,
     address: PropTypes.string,
     functionalities: PropTypes.array,
     type: PropTypes.string,

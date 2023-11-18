@@ -20,6 +20,9 @@ body {
   text-align: left;
 }
 
+.openModal {
+  overflow: hidden;
+}
 /* @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
