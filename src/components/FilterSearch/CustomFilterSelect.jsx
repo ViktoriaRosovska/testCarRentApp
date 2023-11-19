@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { FilterSelect, SelectLabel } from "./FilterSearch.styled";
 
-export const CustomFilterSelect = ({ width, label, placeholder, options, name, onChange, ...props }) => {
+export const CustomFilterSelect = ({ width, label, placeholder, options, name, onChange }) => {
   const styles = {
     control: (baseStyles, state) => ({
       ...baseStyles,
@@ -21,7 +21,6 @@ export const CustomFilterSelect = ({ width, label, placeholder, options, name, o
     }),
     singleValue: (baseStyles) => ({
       ...baseStyles,
-      ...props,
       textAlign: "right",
       fontSize: "18px",
       fontWeight: "500",
@@ -35,7 +34,6 @@ export const CustomFilterSelect = ({ width, label, placeholder, options, name, o
     }),
     indicatorsContainer: (baseStyles) => ({
       ...baseStyles,
-      ...props,
       paddingLeft: "16px",
       paddingRight: "16px",
       justifyContent: "flex-end",
@@ -65,8 +63,8 @@ export const CustomFilterSelect = ({ width, label, placeholder, options, name, o
         backgroundColor: "transparent",
       },
     }),
-    option: (base) => ({
-      ...base,
+    option: (baseStyles) => ({
+      ...baseStyles,
       boxShadow: "none",
       width: "100%",
       backgroundColor: "transparent",
@@ -105,6 +103,8 @@ export const CustomFilterSelect = ({ width, label, placeholder, options, name, o
           name={name}
           onChange={onChange}
           width={width}
+          isClearable={true}
+          isSearchable={true}
         />
       </SelectLabel>
     </>
@@ -112,6 +112,8 @@ export const CustomFilterSelect = ({ width, label, placeholder, options, name, o
 };
 
 CustomFilterSelect.propTypes = {
+  isClearable: PropTypes.bool,
+  isSearchable: PropTypes.bool,
   width: PropTypes.string,
   label: PropTypes.string,
   placeholder: PropTypes.string,

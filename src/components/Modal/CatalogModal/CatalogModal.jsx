@@ -57,7 +57,6 @@ export const CatalogModal = ({ advertId }) => {
       return word;
     }
   };
-  const onShowModalClick = () => {};
 
   return (
     <>
@@ -94,7 +93,12 @@ export const CatalogModal = ({ advertId }) => {
         <SubTitle>Rental Company:</SubTitle>&nbsp;{rentalCompany}
       </CompanyWrapper>
 
-      <BaseButton type="button" title="Rental car" onClick={onShowModalClick} padding="12px 50px" />
+      <BaseButton
+        type="button"
+        title="Rental car"
+        padding="12px 50px"
+        onClick={() => (document.location = "tel:+380730000000")}
+      />
     </>
   );
 };

@@ -34,13 +34,16 @@ export const getAdvertById = createAsyncThunk("adverts/getAdvertById", async (id
 });
 
 export const getFilterAdverts = createAsyncThunk("adverts/filterAdverts", async (searchQuery, thunkAPI) => {
-  const { make, rentalPrice } = searchQuery;
   try {
-    const params = new URLSearchParams();
-    params.append("make", make);
-    params.append("rentalPrice", rentalPrice);
-    const response = await axios.get(`/adverts?${params}`);
-    return response.data;
+    const response = await axios.get(`/adverts`);
+    let data = response.data;
+
+    for (const field in searchQuery) {
+      const value = searchQuery[field];
+      if (value !== "") data = data.filter((d) => d[field] === value);
+    }
+
+    return data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }

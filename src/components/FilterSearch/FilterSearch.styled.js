@@ -17,11 +17,13 @@ export const FilterSelect = styled(Select)`
   }
 `;
 export const FilterWrapper = styled.div`
-  /* border: 1px solid red; */
   display: flex;
   justify-content: center;
-  height: 74px;
+
   margin-bottom: 50px;
+  @media screen and (min-width: 768px) {
+    height: 74px;
+  }
 `;
 export const SelectLabel = styled.label`
   display: flex;
@@ -38,8 +40,14 @@ export const SelectLabel = styled.label`
 
 export const FormSearch = styled.form`
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-end;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
   gap: 18px;
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    gap: 18px;
+    justify-content: flex-start;
+    align-items: flex-end;
+  }
 `;

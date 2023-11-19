@@ -10,7 +10,6 @@ import { LoadMoreButton, PageWrapper } from "./CatalogPage.styled";
 
 export default function CatalogPage() {
   const filter = useSelector(filterSelector);
-  console.log(filter);
   const [showModal, setShowModal] = useState(false);
   const [advertId, setAdvertId] = useState("");
   const onShowModalClick = (advertId) => {

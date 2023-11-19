@@ -1,5 +1,9 @@
-import { LogoWrap } from "./Logo.styled";
-
+import { LogoImg, LogoWrap } from "./Logo.styled";
+import logoImg from "../../assets/image/logo.jpg";
 export const Logo = () => {
-  return <LogoWrap>Logo</LogoWrap>;
+  return (
+    <LogoWrap>
+      <LogoImg src={logoImg} />
+    </LogoWrap>
+  );
 };
