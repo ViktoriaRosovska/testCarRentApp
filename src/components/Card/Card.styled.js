@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 
 export const CardWrapper = styled.div`
@@ -11,6 +12,12 @@ export const ImageWrapper = styled.div`
   overflow: hidden;
   border-radius: 14px;
   margin-bottom: 14px;
+  position: relative;
+  & svg {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+  }
 `;
 export const TitleWraper = styled.div`
   display: flex;
@@ -33,7 +40,10 @@ export const TitleWraper = styled.div`
     height: 24px;
   }
 `;
-export const ShortDescription = styled.div`
+export const ShortDescription = styled(({ children, ...props }) => {
+  delete props["marginbottom"];
+  return React.createElement("div", props, children);
+})`
   font-size: 12px;
   color: rgba(18, 20, 23, 0.5);
   line-height: 18px;

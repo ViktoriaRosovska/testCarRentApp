@@ -1,12 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { getAdvertById, getAdverts } from "./operations";
+import { getAdvertById, getAdverts, getAllAdverts, getFilterAdverts } from "./operations";
 
 const advertsSlice = createSlice({
   name: "adverts",
   initialState: {
     adverts: [],
     advertById: {},
+    filters: [],
     isLoading: false,
     error: null,
   },
@@ -14,6 +15,16 @@ const advertsSlice = createSlice({
     builder
       .addCase(getAdverts.fulfilled, (state, action) => {
         state.adverts = action.payload;
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(getAllAdverts.fulfilled, (state, action) => {
+        state.adverts = action.payload;
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(getFilterAdverts.fulfilled, (state, action) => {
+        state.filters = action.payload;
         state.isLoading = false;
         state.error = null;
       })

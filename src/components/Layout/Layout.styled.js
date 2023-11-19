@@ -2,11 +2,11 @@ import styled from "styled-components";
 
 export const Container = styled.section`
   min-width: 320px;
-  border: 1px solid green;
   padding-left: 10px;
   padding-right: 10px;
   margin-left: auto;
   margin-right: auto;
+
   @media screen and (min-width: 375px) and (max-width: 767.98px) {
     padding-left: 20px;
     padding-right: 20px;

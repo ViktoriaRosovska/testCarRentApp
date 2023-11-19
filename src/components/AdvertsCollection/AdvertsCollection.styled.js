@@ -6,4 +6,5 @@ export const CollectionWrapper = styled.ul`
   flex-wrap: wrap;
   row-gap: 29px;
   column-gap: 50px;
+  margin-bottom: 100px;
 `;

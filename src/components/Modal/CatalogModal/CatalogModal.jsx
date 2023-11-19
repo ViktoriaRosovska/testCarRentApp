@@ -1,8 +1,9 @@
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { advertById } from "../../../redux/adverts/advertsSelectors";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { getAdvertById } from "../../../redux/adverts/operations";
+
 import {
   CompanyWrapper,
   Description,
@@ -15,10 +16,9 @@ import {
 import { ImageItem } from "../../../App.styled";
 import { ShortDescription } from "../../Card/Card.styled";
 import { BaseButton } from "../../Button/BaseButton";
-import { Modal } from "../Modal";
+import { shortAddress } from "../../../helpers/shortAddress";
 
 export const CatalogModal = ({ advertId }) => {
-  const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
   const currentAdvert = useSelector(advertById);
   const {
@@ -39,14 +39,14 @@ export const CatalogModal = ({ advertId }) => {
     mileage,
     year,
   } = currentAdvert;
-  console.log(currentAdvert);
+
   useEffect(() => {
     dispatch(getAdvertById(advertId));
   }, [dispatch, advertId]);
 
   const checkNumber = (word) => {
+    if (!word) return;
     const index = word.search(/: /);
-    console.log(word);
     if (index !== -1) {
       return (
         <>
@@ -57,12 +57,8 @@ export const CatalogModal = ({ advertId }) => {
       return word;
     }
   };
-  const onShowModalClick = () => {
-    setShowModal(true);
-  };
-  const onBackdropClose = () => {
-    setShowModal(false);
-  };
+  const onShowModalClick = () => {};
+
   return (
     <>
       <ImageWrapper>
@@ -72,7 +68,7 @@ export const CatalogModal = ({ advertId }) => {
         {make}&nbsp;<span>{model}</span>&nbsp;{year}
       </TitleWraper>
       <ShortDescription marginbottom="14px">
-        {address} | id: {id} | Year: {year} | Type: {type} | Fuel Consumption:&nbsp;
+        {shortAddress(address)} | Id: {id} | Year: {year} | Type: {type} | Fuel Consumption:&nbsp;
         {fuelConsumption} | Engine Size: {engineSize}
       </ShortDescription>
       <Wrapper>
@@ -88,19 +84,17 @@ export const CatalogModal = ({ advertId }) => {
           <SpanBtn key={idx}>{checkNumber(el)}</SpanBtn>
         ))}
         <SpanBtn>
-          Mileage: <span>{mileage / 1000}</span>
+          Mileage: <span>{mileage && mileage / 1000}</span>
         </SpanBtn>
         <SpanBtn>
           Rental Price: <span>{rentalPrice}</span>
         </SpanBtn>
-        <CompanyWrapper></CompanyWrapper>
       </Wrapper>
       <CompanyWrapper>
         <SubTitle>Rental Company:</SubTitle>&nbsp;{rentalCompany}
       </CompanyWrapper>
 
-      <BaseButton type="button" title="Rental car" onClick={onShowModalClick} />
-      {showModal && <Modal onBackdropClose={onBackdropClose}>{/* <CatalogModal  /> */}</Modal>}
+      <BaseButton type="button" title="Rental car" onClick={onShowModalClick} padding="12px 50px" />
     </>
   );
 };

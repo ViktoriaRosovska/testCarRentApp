@@ -1,18 +1,21 @@
 import { useEffect, useState } from "react";
 import { getAdverts } from "../../redux/adverts/operations";
-import { advertsSelector } from "../../redux/adverts/advertsSelectors";
+import { advertsSelector, filterSelector } from "../../redux/adverts/advertsSelectors";
 import { useDispatch, useSelector } from "react-redux";
 import { AdvertsCollection } from "../../components/AdvertsCollection/AdvertsCollection";
 import { Modal } from "../../components/Modal/Modal";
 import { CatalogModal } from "../../components/Modal/CatalogModal/CatalogModal";
+import { FilterSearch } from "../../components/FilterSearch/FilterSearch";
+import { LoadMoreButton, PageWrapper } from "./CatalogPage.styled";
 
 export default function CatalogPage() {
+  const filter = useSelector(filterSelector);
+  console.log(filter);
   const [showModal, setShowModal] = useState(false);
   const [advertId, setAdvertId] = useState("");
   const onShowModalClick = (advertId) => {
     setShowModal(true);
     setAdvertId(advertId);
-    console.log("hello", advertId);
   };
   const onBackdropClose = () => {
     setShowModal(false);
@@ -38,18 +41,20 @@ export default function CatalogPage() {
   return !moreAdverts ? (
     <div>Loading</div>
   ) : (
-    <>
-      <AdvertsCollection adverts={moreAdverts} onShowModalClick={onShowModalClick} />
-      {moreAdverts.length === 12 && (
-        <button type="button" onClick={() => handleLoadMore()}>
+    <PageWrapper>
+      <FilterSearch />
+      <AdvertsCollection adverts={filter.length ? filter : moreAdverts} onShowModalClick={onShowModalClick} />
+      {!filter.length && moreAdverts.length === 12 && (
+        <LoadMoreButton type="button" onClick={() => handleLoadMore()}>
           Load more
-        </button>
+        </LoadMoreButton>
       )}
+
       {showModal && (
         <Modal onBackdropClose={onBackdropClose} advertId={advertId}>
           <CatalogModal advertId={advertId} />
         </Modal>
       )}
-    </>
+    </PageWrapper>
   );
 }

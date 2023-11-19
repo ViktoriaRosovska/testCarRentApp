@@ -12,11 +12,7 @@ export const Modal = ({ onBackdropClose, children }) => {
   };
   return createPortal(
     <Overlay onClick={onBackdrop} id="Overlay">
-      <ModalContainer>
-        {children}
-
-        {/* <CloseModalButton onClick={() => onBackdropClose()}></CloseModalButton> */}
-      </ModalContainer>
+      <ModalContainer>{children}</ModalContainer>
     </Overlay>,
 
     document.querySelector("#modal-root")
@@ -25,4 +21,5 @@ export const Modal = ({ onBackdropClose, children }) => {
 
 Modal.propTypes = {
   onBackdropClose: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
 };
